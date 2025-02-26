@@ -51,11 +51,12 @@ RUN source /assets/functions/00-container && \
 
 # Install required packages
 RUN apk add --no-cache xrdp xfce4
+# Create xrdp user and group manually
+RUN addgroup -S xrdp && adduser -S xrdp -G xrdp
 
-# Enable xrdp service and allow connections
+# Configure xrdp
 RUN echo "exec startxfce4" > /etc/xrdp/startwm.sh && \
     chmod +x /etc/xrdp/startwm.sh && \
-    adduser xrdp xrdp && \
     rc-update add xrdp && \
     echo "xrdp ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
