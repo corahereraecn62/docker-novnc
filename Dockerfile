@@ -64,6 +64,14 @@ RUN apt update && apt install -y \
 
 RUN service xrdp restart
 
+RUN apt update && apt install -y wget \
+    && wget -qO- https://dl.google.com/linux/linux_signing_key.pub | gpg --dearmor > /usr/share/keyrings/google-chrome.gpg \
+    && echo 'deb [signed-by=/usr/share/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main' > /etc/apt/sources.list.d/google-chrome.list \
+    && apt update \
+    && apt install -y google-chrome-stable
+
+RUN apt update && apt install -y firefox-esr
+
 RUN echo "=== Debugging Xorg & noVNC ===" && \
     Xorg -version && \
     ls -l /usr/bin/startxfce4 /usr/bin/gnome-session && \
