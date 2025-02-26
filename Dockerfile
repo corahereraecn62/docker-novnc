@@ -49,7 +49,22 @@ RUN source /assets/functions/00-container && \
     chown -R ${APP_USER}:${APP_USER} /data && \
     package cleanup
 
-EXPOSE 6080 5900
+# Install required packages
+RUN apk add --no-cache xrdp xfce4
+
+# Enable xrdp service and allow connections
+RUN echo "exec startxfce4" > /etc/xrdp/startwm.sh && \
+    chmod +x /etc/xrdp/startwm.sh && \
+    adduser xrdp xrdp && \
+    rc-update add xrdp && \
+    echo "xrdp ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+
+EXPOSE 6080 5900 3389
 WORKDIR /data
+
+# Start xrdp service
+CMD ["/usr/sbin/xrdp", "--nodaemon"]
+
+USER root
 
 COPY install/ /
