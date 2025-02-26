@@ -80,6 +80,6 @@ CMD service xrdp start && \
     startxfce4
 
 EXPOSE 6080 5900
-WORKDIR /data
+WORKDIR /
 
 COPY install/ /
