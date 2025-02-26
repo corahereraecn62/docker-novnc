@@ -50,7 +50,7 @@ RUN source /assets/functions/00-container && \
     package cleanup
 
 # Install required packages
-RUN apk add --no-cache xrdp xfce4 sudo
+RUN apk add --no-cache xrdp xfce4 sudo openrc
 
 # Create xrdp user and group manually
 RUN addgroup -S xrdp && adduser -S xrdp -G xrdp
@@ -60,6 +60,9 @@ RUN echo "exec startxfce4" > /etc/xrdp/startwm.sh && \
     chmod +x /etc/xrdp/startwm.sh && \
     rc-update add xrdp default && \
     echo "xrdp ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+
+# Prevent OpenRC from complaining in Docker
+RUN touch /run/openrc/softlevel
 
 EXPOSE 6080 5900 3389
 WORKDIR /data
