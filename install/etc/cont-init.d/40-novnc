@@ -63,7 +63,6 @@ liftoff
 
 print_start "Starting xeyes"
 export HOME="/"
-export DISPLAY=":1"
 silent s6-setuidgid ${APP_USER} startxfce4
 
 liftoff
