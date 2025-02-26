@@ -61,8 +61,8 @@ RUN echo "exec startxfce4" > /etc/xrdp/startwm.sh && \
     rc-update add xrdp default && \
     echo "xrdp ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
-# Prevent OpenRC from complaining in Docker
-RUN touch /run/openrc/softlevel
+# Fix OpenRC issues in Docker
+RUN mkdir -p /run/openrc && touch /run/openrc/softlevel
 
 EXPOSE 6080 5900 3389
 WORKDIR /data
