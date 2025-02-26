@@ -50,14 +50,15 @@ RUN source /assets/functions/00-container && \
     package cleanup
 
 # Install required packages
-RUN apk add --no-cache xrdp xfce4
+RUN apk add --no-cache xrdp xfce4 sudo
+
 # Create xrdp user and group manually
 RUN addgroup -S xrdp && adduser -S xrdp -G xrdp
 
 # Configure xrdp
 RUN echo "exec startxfce4" > /etc/xrdp/startwm.sh && \
     chmod +x /etc/xrdp/startwm.sh && \
-    rc-update add xrdp && \
+    rc-update add xrdp default && \
     echo "xrdp ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
 EXPOSE 6080 5900 3389
