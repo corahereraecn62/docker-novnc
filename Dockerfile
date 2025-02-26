@@ -61,8 +61,6 @@ RUN apt update && apt install -y \
     xfce4 \
     xfce4-terminal \
     xfce4-session
-    
-RUN ls -l /usr/bin/startxfce4 /usr/bin/gnome-session
 
 RUN service xrdp restart
 
