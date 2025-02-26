@@ -74,7 +74,6 @@ CMD service xrdp start && \
     export DISPLAY=:1 && \
     startxfce4
 
-
 EXPOSE 6080 5900
 WORKDIR /data
 
