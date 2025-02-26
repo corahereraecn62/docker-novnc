@@ -5,7 +5,7 @@ FROM tiredofit/nginx:${DISTRO}-${DISTRO_VARIANT}
 LABEL maintainer="Dave Conroy (github.com/tiredofit)"
 
 ENV APP_USER=app \
-    XDG_RUNTIME_DIR=/data \
+    XDG_RUNTIME_DIR=/ \
     CONTAINER_ENABLE_PERMISSIONS=TRUE \
     NGINX_ENABLE_CREATE_SAMPLE_HTML=FALSE \
     NGINX_SITE_ENABLED="novnc" \
