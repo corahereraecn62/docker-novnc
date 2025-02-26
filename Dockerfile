@@ -51,6 +51,22 @@ RUN source /assets/functions/00-container && \
     package cleanup && \
     rm -rf /var/tmp/*
 
+RUN echo "=== Debugging Xorg & noVNC ===" && \
+    Xorg -version && \
+    ls -l /usr/bin/startxfce4 /usr/bin/gnome-session && \
+    echo "=== Checking XRDP Services ===" && \
+    ps aux | grep xrdp && \
+    echo "=== Checking DISPLAY Variable ===" && \
+    echo "DISPLAY=$DISPLAY" && \
+    echo "=== Listing XRDP Logs ===" && \
+    cat /var/log/xrdp.log /var/log/Xorg.0.log || true
+    
+CMD service xrdp start && \
+    Xorg :1 -noreset -nolisten tcp vt7 & \
+    export DISPLAY=:1 && \
+    startxfce4
+
+
 EXPOSE 6080 5900
 WORKDIR /data
 
