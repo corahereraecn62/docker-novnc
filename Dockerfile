@@ -50,14 +50,21 @@ RUN source /assets/functions/00-container && \
     chown -R ${APP_USER}:${APP_USER} /data && \
     package cleanup && \
     rm -rf /var/tmp/*
-
+    
 RUN apt update && apt install -y \
     xserver-xorg \
     xinit \
     x11-xserver-utils \
     xrdp \
     dbus-x11 \
-    x11-apps
+    x11-apps \
+    xfce4 \
+    xfce4-terminal \
+    xfce4-session
+    
+RUN ls -l /usr/bin/startxfce4 /usr/bin/gnome-session
+
+RUN service xrdp restart
 
 RUN echo "=== Debugging Xorg & noVNC ===" && \
     Xorg -version && \
