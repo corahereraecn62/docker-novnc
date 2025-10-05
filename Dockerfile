@@ -1,5 +1,5 @@
 # Base image
-FROM tiredofit/novnc:latest
+FROM tiredofit/novnc:debian
 
 # Environment variables
 ENV DISPLAY=:1
