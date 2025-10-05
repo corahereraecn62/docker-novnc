@@ -1,5 +1,5 @@
 # Base image (from tiredofit, stable + maintained)
-FROM tiredofit/docker-novnc:latest
+FROM dorowu/ubuntu-desktop-lxde-vnc:latest
 
 # Optional: set default environment variables
 ENV DISPLAY=:0 \
